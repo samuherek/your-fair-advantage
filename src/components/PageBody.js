@@ -9,9 +9,9 @@ const Body = styled.div`
   h1,
   h2,
   h3 {
-    font-weight: 600;
+    font-weight: 900;
     line-height: 1.25;
-    margin: 0 0 1rem 0;
+    margin: 0 0 1.5rem 0;
     text-transform: capitalize;
   }
 
@@ -22,7 +22,8 @@ const Body = styled.div`
     font-size: 1.25em;
   }
   h3 {
-    font-size: 1em;
+    font-size: 1.75rem;
+    line-height: 1.42;
   }
 
   p {
@@ -96,6 +97,12 @@ const Body = styled.div`
     span {
       background: inherit !important;
     }
+  }
+
+  img {
+    max-height: 470px;
+    width: auto;
+    margin: 0 auto;
   }
 `;
 
