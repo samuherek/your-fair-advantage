@@ -1,22 +1,15 @@
-import React from 'react'
-import Helmet from 'react-helmet'
-import styled from 'styled-components'
-import config from '../utils/siteConfig'
-import Container from '../components/Container'
-import PageTitle from '../components/PageTitle'
-import PageBody from '../components/PageBody'
+import React from 'react';
+import Helmet from 'react-helmet';
+import styled from 'styled-components';
+import config from '../utils/siteConfig';
+import Container from '../components/Container';
+import PageBody from '../components/PageBody';
 
-const PageTemplate = ({data}) => {
+const PageTemplate = ({ data }) => {
+  const { title, slug, body } = data.contentfulPage;
 
-  const {
-    title,
-    slug,
-    body,
-  } = data.contentfulPage;
-
-  return(
+  return (
     <div>
-
       <Helmet>
         <title>{`${title} - ${config.siteTitle}`}</title>
         <meta property="og:title" content={`${title} - ${config.siteTitle}`} />
@@ -24,17 +17,15 @@ const PageTemplate = ({data}) => {
       </Helmet>
 
       <Container>
-        <PageTitle>{title}</PageTitle>
         <PageBody body={body} />
       </Container>
-
     </div>
-  )
-}
+  );
+};
 
 export const query = graphql`
   query pageQuery($slug: String!) {
-    contentfulPage(slug: {eq: $slug}) {
+    contentfulPage(slug: { eq: $slug }) {
       title
       slug
       body {
@@ -44,6 +35,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export default PageTemplate
+export default PageTemplate;

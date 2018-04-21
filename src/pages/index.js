@@ -5,27 +5,13 @@ import config from '../utils/siteConfig';
 import CardList from '../components/CardList';
 import Card from '../components/Card';
 import Container from '../components/Container';
-import PageTitle from '../components/PageTitle';
 
 const Index = ({ data }) => {
   const posts = data.allContentfulPost.edges;
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <Container>
-      <PageTitle small>
-        <a href="https://www.gatsbyjs.org/" target="_blank">
-          Gatsby
-        </a>,{' '}
-        <a href="https://www.contentful.com/" target="_blank">
-          Contentful
-        </a>{' '}
-        and{' '}
-        <a href="https://www.netlify.com/" target="_blank">
-          Netlify
-        </a>{' '}
-        <span>🎉</span>
-      </PageTitle>
       <CardList>
         {posts.map(({ node: post }) => (
           <Card

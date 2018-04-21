@@ -1,13 +1,20 @@
 const theme = {
   colors: {
-    base: '#121212', // Black
+    base: '#232323', // Black
     secondary: '#e9e9e9', // Medium Gray
     tertiary: '#f3f3f3', // Light Gray
     highlight: '#5b8bf7' // Light Blue
   },
+  fonts: {
+    strong:
+      "Montserrat,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+    regular:
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
+  },
   sizes: {
     maxWidth: '1200px',
-    maxWidthCentered: '650px'
+    maxWidthCentered: '760px',
+    maxWidthArticle: '660px'
   },
   responsive: {
     small: '35em',

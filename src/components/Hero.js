@@ -1,60 +1,92 @@
-import React from 'react'
-import Img from 'gatsby-image'
-import styled from 'styled-components'
+import React from 'react';
+import Img from 'gatsby-image';
+import styled from 'styled-components';
+import Link from 'gatsby-link';
+import { media } from '../utils/styled';
 
-const Wrapper = styled.section`
+const Wrapper = styled.header`
   position: relative;
-  min-height: 300px;
-`
-const BgImg = styled(Img)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: -1;
-  min-height: 300px;
-  height: auto;
-  @media (min-width: ${props => props.theme.responsive.small}) {
-    height: ${props => props.height || 'auto'};
+  max-width: ${props => props.theme.sizes.maxWidth};
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem;
+
+  ${media.minMedium} {
+    text-align: center;
+    padding: 5rem 1.5rem 1.5rem;
   }
-  & > img {
-    object-fit: ${props => props.fit || 'cover'} !important;
-    object-position: ${props => props.position || '50% 50%'} !important;
+`;
+
+const Date = styled.span`
+  opacity: 0.5;
+  font-size: 0.5rem;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+
+  ${media.minMedium} {
+    margin-bottom: 2.5rem;
   }
-  &:before {
-    content: '';
-    background: rgba(0,0,0,.25);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-  }
-`
+`;
 
 const Title = styled.h1`
-  font-size: 3em;
+  font-size: 2rem;
   text-transform: capitalize;
-  font-weight: 600;
-  position: absolute;
-  width: 100%;
+
+  ${media.minMedium} {
+    font-size: 3rem;
+    margin-bottom: 2.5rem;
+  }
+`;
+
+const List = styled.ul`
+  margin: 0 auto 2.5rem auto;
   max-width: ${props => props.theme.sizes.maxWidthCentered};
-  padding: 0 1rem;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
-`
+`;
 
-const Hero = (props) => (
+const Tag = styled.li`
+  display: inline-block;
+  margin-right: 1rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  a {
+    transition: 0.2s;
+    background: white;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.5;
+    border-radius: 2px;
+    text-transform: capitalize;
+    text-decoration: none;
+    color: ${props => props.theme.colors.base};
+    border: 1px solid ${props => props.theme.colors.secondary};
+
+    &:hover {
+      background: ${props => props.theme.colors.secondary};
+      opacity: 1;
+    }
+  }
+`;
+
+const Hero = props => (
   <Wrapper>
-    <BgImg height={props.height} sizes={props.image.sizes} backgroundColor={'#eeeeee'} />
+    <Date>{props.date}</Date>
     <Title>{props.title}</Title>
+    {props.tags && (
+      <List>
+        {props.tags.map(tag => (
+          <Tag key={tag.id}>
+            <Link to={`/tag/${tag.slug}/`}>{tag.title}</Link>
+          </Tag>
+        ))}
+      </List>
+    )}
   </Wrapper>
-)
+);
 
-export default Hero
+export default Hero;

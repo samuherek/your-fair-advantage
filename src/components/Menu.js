@@ -1,17 +1,31 @@
-import React from 'react'
-import Link from 'gatsby-link'
-import styled from 'styled-components'
+import React from 'react';
+import Link from 'gatsby-link';
+import styled from 'styled-components';
 
 const Header = styled.header`
-  background: ${props => props.theme.colors.base};
   width: 100%;
-  padding: 1.5em 0;
-`
-const Nav = styled.nav`
-  width: 100%;
+`;
+
+const Container = styled.div`
   max-width: ${props => props.theme.sizes.maxWidth};
   margin: 0 auto;
-  padding: 0 1.5em;
+  display: flex;
+`;
+
+const Logo = styled.div`
+  padding: 1.5rem 1.5rem;
+  font-family: ${props => props.theme.fonts.strong};
+  font-weight: 900;
+
+  a {
+    text-decoration: none;
+    color: ${props => props.theme.colors.base};
+  }
+`;
+
+const Nav = styled.nav`
+  margin-left: auto;
+  padding: 1.5rem 1.5rem;
 
   ul {
     display: flex;
@@ -32,30 +46,44 @@ const Nav = styled.nav`
     text-decoration: none;
     color: DarkGray;
     font-weight: 600;
-    transition: all .2s;
+    transition: all 0.2s;
     border-bottom: 2px solid ${props => props.theme.colors.base};
     &:hover {
       color: white;
     }
   }
-`
+`;
 
 const activeLinkStyle = {
-  color: 'white'
+  // color: 'white'
 };
 
 const Menu = () => {
-    return (
-      <Header>
+  return (
+    <Header>
+      <Container>
+        <Logo>
+          <Link to="/" exact activeStyle={activeLinkStyle}>
+            YourFairAdvantage
+          </Link>
+        </Logo>
         <Nav>
           <ul>
-            <li><Link to="/" exact activeStyle={activeLinkStyle}>Home</Link></li>
-            <li><Link to="/about/" activeStyle={activeLinkStyle}>About</Link></li>
-            <li><Link to="/contact/" activeStyle={activeLinkStyle}>Contact</Link></li>
+            <li>
+              <Link to="/about/" activeStyle={activeLinkStyle}>
+                About
+              </Link>
+            </li>
+            {/* <li>
+              <Link to="/contact/" activeStyle={activeLinkStyle}>
+                Contact
+              </Link>
+            </li> */}
           </ul>
         </Nav>
-      </Header>
-    )
-}
+      </Container>
+    </Header>
+  );
+};
 
-export default Menu
+export default Menu;
