@@ -15,7 +15,7 @@ try {
 
 module.exports = {
   plugins: [
-    'gatsby-plugin-amplitude',
+    // 'gatsby-plugin-amplitude',
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
