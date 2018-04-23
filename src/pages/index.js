@@ -49,6 +49,7 @@ const MoreContainer = styled.div`
 
 const Index = ({ data }) => {
   const posts = data.allContentfulPost.edges;
+  const vlogs = data.allContentfulVlog.edges;
 
   return (
     <main>
@@ -71,6 +72,18 @@ const Index = ({ data }) => {
               title={post.title}
               date={post.publishDate}
               excerpt={post.body}
+            />
+          ))}
+        </CardList>
+        <CardList>
+          {vlogs.map(({ node: post }) => (
+            <Card
+              key={post.id}
+              slug={post.slug}
+              image={post.heroImage}
+              title={post.title}
+              date={post.publishDate}
+              excerpt={post.exceprt}
             />
           ))}
         </CardList>
@@ -102,6 +115,25 @@ export const query = graphql`
               html
               excerpt(pruneLength: 80)
             }
+          }
+        }
+      }
+    }
+    allContentfulVlog(limit: 3, sort: { fields: [publishDate], order: DESC }) {
+      edges {
+        node {
+          title
+          id
+          slug
+          publishDate(formatString: "MMMM DD, YYYY")
+          heroImage {
+            title
+            sizes(maxWidth: 800) {
+              ...GatsbyContentfulSizes_withWebp_noBase64
+            }
+          }
+          excerpt {
+            excerpt
           }
         }
       }

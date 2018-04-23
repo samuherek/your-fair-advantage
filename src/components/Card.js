@@ -52,13 +52,18 @@ const Excerpt = styled.p`
 `;
 
 const Card = props => {
+  console.log(props);
   return (
     <Post>
       <Link to={`/${props.slug}/`}>
-        <Img sizes={props.image.sizes} backgroundColor={'#eeeeee'} />
+        {props.image && <Img sizes={props.image.sizes} backgroundColor={'#eeeeee'} />}
         <Title>{props.title}</Title>
         <Date>{props.date}</Date>
-        <Excerpt dangerouslySetInnerHTML={{ __html: props.excerpt.childMarkdownRemark.excerpt }} />
+        {props.excerpt && (
+          <Excerpt
+            dangerouslySetInnerHTML={{ __html: props.excerpt.childMarkdownRemark.excerpt }}
+          />
+        )}
       </Link>
     </Post>
   );
