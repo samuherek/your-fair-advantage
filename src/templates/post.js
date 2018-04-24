@@ -94,7 +94,7 @@ const PostTemplate = ({ data }) => {
 
 export const query = graphql`
   query postQuery($slug: String!) {
-    contentfulPost(slug: { eq: $slug }) {
+    contentfulPost(slug: { eq: $slug }, publishDate: { ne: null }) {
       title
       id
       slug

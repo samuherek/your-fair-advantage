@@ -76,14 +76,14 @@ const Index = ({ data }) => {
           ))}
         </CardList>
         <CardList>
-          {vlogs.map(({ node: post }) => (
+          {vlogs.map(({ node: vlog }) => (
             <Card
-              key={post.id}
-              slug={post.slug}
-              image={post.heroImage}
-              title={post.title}
-              date={post.publishDate}
-              excerpt={post.exceprt}
+              key={vlog.id}
+              slug={`vlog/${vlog.slug}`}
+              image={vlog.heroImage}
+              title={vlog.title}
+              date={vlog.publishDate}
+              excerpt={vlog.exceprt}
             />
           ))}
         </CardList>
@@ -97,7 +97,11 @@ const Index = ({ data }) => {
 
 export const query = graphql`
   query indexQuery {
-    allContentfulPost(limit: 3, sort: { fields: [publishDate], order: DESC }) {
+    allContentfulPost(
+      limit: 3
+      filter: { publishDate: { ne: null } }
+      sort: { fields: [publishDate], order: DESC }
+    ) {
       edges {
         node {
           title
