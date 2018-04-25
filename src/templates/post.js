@@ -59,6 +59,15 @@ const Excerpt = styled.div`
   }
 `;
 
+const Footer = styled.footer`
+  margin: 0 auto;
+  max-width: ${props => props.theme.sizes.maxWidth};
+  border-bottom: 1px solid #efefef;
+  padding-top: 2.5rem;
+  padding-bottom: 5rem;
+  margin-bottom: 5rem;
+`;
+
 const PostTemplate = ({ data }) => {
   const {
     title,
@@ -86,7 +95,9 @@ const PostTemplate = ({ data }) => {
       {/* <BgImg height={'50vh'} sizes={heroImage.sizes} backgroundColor={'#eeeeee'} /> */}
       <Excerpt dangerouslySetInnerHTML={{ __html: excerpt.childMarkdownRemark.html }} />
       <PageBody body={body} />
-      <SocialShare pathname={`/${slug}`} title={title} image={heroImage.sizes.src} />
+      <Footer>
+        <SocialShare pathname={`/${slug}`} title={title} image={heroImage.sizes.src} />
+      </Footer>
       <PostLinks previous={postIndex.previous} next={postIndex.next} />
     </article>
   );
@@ -136,6 +147,12 @@ export const query = graphql`
               ...GatsbyContentfulSizes_withWebp_noBase64
             }
           }
+          body {
+            childMarkdownRemark {
+              html
+              excerpt(pruneLength: 80)
+            }
+          }
         }
         next {
           slug
@@ -144,6 +161,12 @@ export const query = graphql`
             title
             sizes(maxWidth: 500) {
               ...GatsbyContentfulSizes_withWebp_noBase64
+            }
+          }
+          body {
+            childMarkdownRemark {
+              html
+              excerpt(pruneLength: 80)
             }
           }
         }

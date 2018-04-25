@@ -3,12 +3,9 @@ import styled from 'styled-components';
 import Link from 'gatsby-link';
 import Img from 'gatsby-image';
 
-const Post = styled.li`
-  // border: 1px solid ${props => props.theme.colors.secondary};
-  // border-radius: 2px;
+const Post = styled.div`
   margin: 0 0 1em 0;
   width: 100%;
-  // transition: background 0.2s;
   @media screen and (min-width: ${props => props.theme.responsive.small}) {
     flex: 0 0 49%;
     margin: 0 0 2vw 0;
@@ -16,9 +13,6 @@ const Post = styled.li`
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     flex: 0 0 32%;
   }
-  // &:hover {
-  //   background: ${props => props.theme.colors.tertiary};
-  // }
   a {
     display: flex;
     flex-flow: column;
@@ -52,18 +46,22 @@ const Excerpt = styled.p`
 `;
 
 const Card = props => {
-  console.log(props);
+  // TODO: This is a mess. I'm getting other excerpt types from psot and from vlog
   return (
     <Post>
       <Link to={`/${props.slug}/`}>
         {props.image && <Img sizes={props.image.sizes} backgroundColor={'#eeeeee'} />}
         <Title>{props.title}</Title>
-        <Date>{props.date}</Date>
-        {props.excerpt && (
-          <Excerpt
-            dangerouslySetInnerHTML={{ __html: props.excerpt.childMarkdownRemark.excerpt }}
-          />
-        )}
+        {props.date && <Date>{props.date}</Date>}
+        {props.excerpt ? (
+          props.excerpt.childMarkdownRemark ? (
+            <Excerpt
+              dangerouslySetInnerHTML={{ __html: props.excerpt.childMarkdownRemark.excerpt }}
+            />
+          ) : (
+            <Excerpt>{props.excerpt}</Excerpt>
+          )
+        ) : null}
       </Link>
     </Post>
   );
