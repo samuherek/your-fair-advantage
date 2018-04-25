@@ -30,7 +30,7 @@ const Hero = styled.div`
 `;
 const MoreContainer = styled.div`
   text-align: center;
-  padding-top: 2.5rem;
+  padding-top: 1.5rem;
   margin-bottom: 5rem;
 
   a {
@@ -75,6 +75,10 @@ const Index = ({ data }) => {
             />
           ))}
         </CardList>
+        <MoreContainer>
+          <Link to="/archive">Explore all articles</Link>
+        </MoreContainer>
+
         <CardList>
           {vlogs.map(({ node: vlog }) => (
             <Card
@@ -87,10 +91,10 @@ const Index = ({ data }) => {
             />
           ))}
         </CardList>
+        <MoreContainer>
+          <Link to="/vlog">Explore all videos</Link>
+        </MoreContainer>
       </Container>
-      <MoreContainer>
-        <Link to="/archive">Explore all the content</Link>
-      </MoreContainer>
     </main>
   );
 };
