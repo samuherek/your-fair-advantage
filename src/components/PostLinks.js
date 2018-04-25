@@ -6,7 +6,7 @@ import Img from 'gatsby-image';
 import Card from './Card';
 import { media } from '../utils/styled';
 
-const Wrapper = styled.div`
+const Wrap = styled.div`
   padding: 0 1.5rem;
   margin: 0 auto;
   max-width: ${props => props.theme.sizes.maxWidthCentered};
@@ -38,21 +38,17 @@ const List = styled.div`
   }
 `;
 
-// const PreviousLink = styled(Link)`
-//   margin-right: auto;
-//   flex: 0 0 32%;
-// `;
-
-const NextLink = styled(Link)`
-  margin-left: auto;
-  flex: 0 0 32%;
+const Empty = styled.span`
+  display: block;
+  text-align: center;
+  margin: 0 auto 5rem auto;
 `;
 
 const PostLinks = props => {
-  console.log(props);
+  // console.log(props);
   return (
-    <Wrapper>
-      <h4>More articles</h4>
+    <Wrap>
+      <h4>More {props.vlog ? 'videos' : 'articles'}</h4>
       <List>
         {props.previous && (
           <Card
@@ -62,8 +58,6 @@ const PostLinks = props => {
             excerpt={props.previous.body}
           />
         )}
-        {/* <Img height="250px" sizes={props.previous.heroImage.sizes} /> */}
-        {/* <PreviousLink to={`/${props.previous.slug}/`}>Prev Post</PreviousLink> */}
         {props.next && (
           <Card
             slug={props.next.slug}
@@ -71,13 +65,13 @@ const PostLinks = props => {
             title={props.next.title}
             excerpt={props.next.body}
           />
-          // <div>
-          //   <Img height="250px" sizes={props.next.heroImage.sizes} />
-          //   <NextLink to={`/${props.next.slug}/`}>Next Post</NextLink>
-          // </div>
         )}
+        {!props.previous &&
+          !props.next && (
+            <Empty>More {props.vlog ? 'videos' : 'articles'} coming. Patience is the key ;)</Empty>
+          )}
       </List>
-    </Wrapper>
+    </Wrap>
   );
 };
 

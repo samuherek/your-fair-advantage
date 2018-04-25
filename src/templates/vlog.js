@@ -14,6 +14,8 @@ import PostDate from '../components/PostDate';
 import HeroTitle from '../components/Post/HeroTitle';
 import HeroDate from '../components/Post/HeroDate';
 import Hero from '../components/Post/Hero';
+import SocialShare from '../components/Post/SocialShare';
+import Footer from '../components/Post/Footer';
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -119,7 +121,10 @@ const VlogTemplate = ({ data }) => {
       {/* <BgImg height={'50vh'} sizes={heroImage.sizes} backgroundColor={'#eeeeee'} /> */}
       <Excerpt dangerouslySetInnerHTML={{ __html: excerpt.childMarkdownRemark.html }} />
       <PageBody body={body} />
-      <PostLinks previous={vlogIndex.previous} next={vlogIndex.next} />
+      <Footer>
+        <SocialShare pathname={`/${slug}`} title={title} image={heroImage.sizes.src} />
+      </Footer>
+      <PostLinks previous={vlogIndex.previous} next={vlogIndex.next} vlog />
     </article>
   );
 };
