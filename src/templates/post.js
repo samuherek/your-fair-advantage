@@ -10,6 +10,7 @@ import PageBody from '../components/PageBody';
 import TagList from '../components/TagList';
 import PostLinks from '../components/PostLinks';
 import PostDate from '../components/PostDate';
+import SocialShare from '../components/Post/SocialShare';
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -83,10 +84,9 @@ const PostTemplate = ({ data }) => {
       </Helmet>
       <Hero title={title} image={heroImage} date={publishDate} tags={tags} />
       {/* <BgImg height={'50vh'} sizes={heroImage.sizes} backgroundColor={'#eeeeee'} /> */}
-      {/* {tags && <TagList tags={tags} />} */}
-      {/* <PostDate date={publishDate} /> */}
       <Excerpt dangerouslySetInnerHTML={{ __html: excerpt.childMarkdownRemark.html }} />
       <PageBody body={body} />
+      <SocialShare pathname={`/${slug}`} title={title} image={heroImage.sizes.src} />
       <PostLinks previous={postIndex.previous} next={postIndex.next} />
     </article>
   );
@@ -132,7 +132,7 @@ export const query = graphql`
           title
           heroImage {
             title
-            sizes(maxWidth: 1800) {
+            sizes(maxWidth: 500) {
               ...GatsbyContentfulSizes_withWebp_noBase64
             }
           }
@@ -142,7 +142,7 @@ export const query = graphql`
           title
           heroImage {
             title
-            sizes(maxWidth: 1800) {
+            sizes(maxWidth: 500) {
               ...GatsbyContentfulSizes_withWebp_noBase64
             }
           }

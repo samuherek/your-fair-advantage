@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Link from 'gatsby-link';
 import { media } from '../utils/styled';
 
-import Tag from './Tag';
+import TagList from './TagList';
 import HeroTitle from './Post/HeroTitle';
 import HeroDate from './Post/HeroDate';
 
@@ -29,15 +29,7 @@ const Hero = props => (
   <Wrapper>
     <HeroDate>{props.date}</HeroDate>
     <HeroTitle>{props.title}</HeroTitle>
-    {props.tags && (
-      <List>
-        {props.tags.map(tag => (
-          <Tag key={tag.id}>
-            <Link to={`/tag/${tag.slug}/`}>{tag.title}</Link>
-          </Tag>
-        ))}
-      </List>
-    )}
+    <TagList tags={props.tags} />
   </Wrapper>
 );
 

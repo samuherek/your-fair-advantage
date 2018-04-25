@@ -4,12 +4,16 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import Img from 'gatsby-image';
 import config from '../utils/siteConfig';
-import Hero from '../components/Hero';
+// import Hero from '../components/Hero';
 import Container from '../components/Container';
 import PageBody from '../components/PageBody';
 import TagList from '../components/TagList';
 import PostLinks from '../components/PostLinks';
 import PostDate from '../components/PostDate';
+
+import HeroTitle from '../components/Post/HeroTitle';
+import HeroDate from '../components/Post/HeroDate';
+import Hero from '../components/Post/Hero';
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -58,6 +62,10 @@ const Excerpt = styled.div`
   }
 `;
 
+const Video = styled.div`
+  margin-bottom: 2.5rem;
+`;
+
 const VlogTemplate = ({ data }) => {
   console.log(data);
   const {
@@ -81,10 +89,34 @@ const VlogTemplate = ({ data }) => {
         <meta property="og:url" content={`${config.siteUrl}/${slug}/`} />
         <meta property="og:image" content={heroImage.sizes.src} />
       </Helmet>
-      <Hero title={title} image={heroImage} date={publishDate} tags={tags} />
+
+      <Hero>
+        <HeroDate>{publishDate}</HeroDate>
+        <HeroTitle>{title}</HeroTitle>
+        <Video>
+          <div
+            className="gatsby-resp-iframe-wrapper"
+            style={{ paddingBottom: '56.25%', position: 'relative', height: 0, overflow: 'hidden' }}
+          >
+            <iframe
+              src="https://www.youtube.com/embed/xfafNuVegEM?rel=0"
+              frameBorder="0"
+              allow="encrypted-media"
+              allowFullScreen="true"
+              style={{
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                width: '100%',
+                height: '100%'
+              }}
+            />
+          </div>
+        </Video>
+        <TagList tags={tags} />
+      </Hero>
+
       {/* <BgImg height={'50vh'} sizes={heroImage.sizes} backgroundColor={'#eeeeee'} /> */}
-      {/* {tags && <TagList tags={tags} />} */}
-      {/* <PostDate date={publishDate} /> */}
       <Excerpt dangerouslySetInnerHTML={{ __html: excerpt.childMarkdownRemark.html }} />
       <PageBody body={body} />
       <PostLinks previous={vlogIndex.previous} next={vlogIndex.next} />
@@ -99,6 +131,7 @@ export const query = graphql`
       id
       slug
       publishDate(formatString: "MMMM DD, YYYY")
+      videoId
       tags {
         title
         id
@@ -132,7 +165,7 @@ export const query = graphql`
           title
           heroImage {
             title
-            sizes(maxWidth: 1800) {
+            sizes(maxWidth: 500) {
               ...GatsbyContentfulSizes_withWebp_noBase64
             }
           }
@@ -142,7 +175,7 @@ export const query = graphql`
           title
           heroImage {
             title
-            sizes(maxWidth: 1800) {
+            sizes(maxWidth: 500) {
               ...GatsbyContentfulSizes_withWebp_noBase64
             }
           }

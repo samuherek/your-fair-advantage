@@ -1,6 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import Link from 'gatsby-link'
+import React from 'react';
+import styled from 'styled-components';
+import Link from 'gatsby-link';
+import Img from 'gatsby-image';
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const Wrapper = styled.div`
     padding: 1em;
     border-radius: 2px;
     text-decoration: none;
-    transition: .2s;
+    transition: 0.2s;
     &:hover {
       background: ${props => props.theme.colors.highlight};
     }
@@ -30,14 +31,18 @@ const NextLink = styled(Link)`
   order: 2;
 `;
 
-
-const PostLinks = (props) => {
+const PostLinks = props => {
   return (
     <Wrapper>
-      {props.previous && (<PreviousLink to={`/${props.previous.slug}/`}>Prev Post</PreviousLink>)}
-      {props.next && (<NextLink to={`/${props.next.slug}/`}>Next Post</NextLink>)}
+      {props.previous && (
+        <div>
+          <Img sizes={props.previous.heroImage.sizes} />
+          <PreviousLink to={`/${props.previous.slug}/`}>Prev Post</PreviousLink>
+        </div>
+      )}
+      {props.next && <NextLink to={`/${props.next.slug}/`}>Next Post</NextLink>}
     </Wrapper>
-  )
-}
+  );
+};
 
-export default PostLinks
+export default PostLinks;
